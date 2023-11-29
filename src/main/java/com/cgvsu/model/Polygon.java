@@ -31,14 +31,14 @@ public class Polygon {
     }
 
     public ArrayList<Integer> getVertexIndices() {
-        return vertexIndices;
+        return new ArrayList<>(vertexIndices);
     }
 
     public ArrayList<Integer> getTextureVertexIndices() {
-        return textureVertexIndices;
+        return new ArrayList<>(textureVertexIndices);
     }
 
     public ArrayList<Integer> getNormalIndices() {
-        return normalIndices;
+        return new ArrayList<>(normalIndices);
     }
 }

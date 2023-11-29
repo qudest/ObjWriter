@@ -12,30 +12,19 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Path fileName = Path.of("3DModels/Faceform/AlexWithTexture/AlexNeutralWrapped.obj");
+        Path fileName = Path.of("3DModels/Faceform/WrapHead.obj");
         String fileContent = Files.readString(fileName);
 
         System.out.println("Loading model ...");
         Model model = ObjReader.read(fileContent);
 
-        System.out.println("Vertices: " + model.vertices.size());
-        System.out.println("Texture vertices: " + model.textureVertices.size());
-        System.out.println("Normals: " + model.normals.size());
-        System.out.println("Polygons: " + model.polygons.size());
+        System.out.println("Vertices: " + model.getVertices().size());
+        System.out.println("Texture vertices: " + model.getTextureVertices().size());
+        System.out.println("Normals: " + model.getNormals().size());
+        System.out.println("Polygons: " + model.getPolygons().size());
 
         String file = "file.obj";
         ObjWriter.write(file, model);
 
-
-        Path fileName1 = Path.of("file.obj");
-        String fileContent1 = Files.readString(fileName1);
-
-        System.out.println("Loading model ...");
-        Model model1 = ObjReader.read(fileContent);
-
-        System.out.println("Vertices: " + model1.vertices.size());
-        System.out.println("Texture vertices: " + model1.textureVertices.size());
-        System.out.println("Normals: " + model1.normals.size());
-        System.out.println("Polygons: " + model1.polygons.size());
     }
 }
