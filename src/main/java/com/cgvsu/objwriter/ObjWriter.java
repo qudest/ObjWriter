@@ -83,9 +83,8 @@ public class ObjWriter {
             if (!normalIndices.isEmpty()) {
                 if (textureVertexIndices.isEmpty()) {
                     objString.append("/");
-                } else {
-                    objString.append("/").append(normalIndices.get(i) + 1);
                 }
+                objString.append("/").append(normalIndices.get(i) + 1);
             }
             objString.append(" ");
         }

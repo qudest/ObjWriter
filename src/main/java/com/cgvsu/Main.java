@@ -1,6 +1,7 @@
 package com.cgvsu;
 
 import com.cgvsu.model.Model;
+import com.cgvsu.model.Polygon;
 import com.cgvsu.objreader.ObjReader;
 import com.cgvsu.objwriter.ObjWriter;
 
@@ -25,6 +26,5 @@ public class Main {
 
         String file = "file.obj";
         ObjWriter.write(file, model);
-
     }
 }

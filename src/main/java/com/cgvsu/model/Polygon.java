@@ -1,6 +1,7 @@
 package com.cgvsu.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Polygon {
 
@@ -8,6 +9,13 @@ public class Polygon {
     private ArrayList<Integer> textureVertexIndices;
     private ArrayList<Integer> normalIndices;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Polygon polygon = (Polygon) o;
+        return Objects.equals(vertexIndices, polygon.vertexIndices) && Objects.equals(textureVertexIndices, polygon.textureVertexIndices) && Objects.equals(normalIndices, polygon.normalIndices);
+    }
 
     public Polygon() {
         vertexIndices = new ArrayList<Integer>();
@@ -16,17 +24,14 @@ public class Polygon {
     }
 
     public void setVertexIndices(ArrayList<Integer> vertexIndices) {
-        assert vertexIndices.size() >= 3;
         this.vertexIndices = vertexIndices;
     }
 
     public void setTextureVertexIndices(ArrayList<Integer> textureVertexIndices) {
-        assert textureVertexIndices.size() >= 3;
         this.textureVertexIndices = textureVertexIndices;
     }
 
     public void setNormalIndices(ArrayList<Integer> normalIndices) {
-        assert normalIndices.size() >= 3;
         this.normalIndices = normalIndices;
     }
 
