@@ -9,13 +9,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 
 class ObjWriterTest {
     @Test
@@ -100,6 +98,84 @@ class ObjWriterTest {
 
         String fileContent = Files.readString(Path.of("testFile.obj"));
         Assertions.assertTrue(fileContent.contains("f 1/1/1 2/2/2 3/3/3 "));
+    }
+
+    @Test
+    public void testWritePolygonsWithoutNormals() throws IOException {
+        ArrayList<Polygon> polygons = new ArrayList<>();
+        Polygon polygon = new Polygon();
+        ArrayList<Integer> vertexIndices = new ArrayList<>();
+        ArrayList<Integer> textureVertexIndices = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            vertexIndices.add(i);
+            textureVertexIndices.add(i);
+        }
+        polygon.setVertexIndices(vertexIndices);
+        polygon.setTextureVertexIndices(textureVertexIndices);
+        polygons.add(polygon);
+
+        File file = new File("testFile.obj");
+        if (file.createNewFile()) {
+            System.out.println("File created");
+        }
+
+        try (PrintWriter printWriter = new PrintWriter(file)) {
+            ObjWriter.writePolygons(printWriter, polygons);
+        }
+
+        String fileContent = Files.readString(Path.of("testFile.obj"));
+        Assertions.assertTrue(fileContent.contains("f 1/1 2/2 3/3 "));
+    }
+
+    @Test
+    public void testWritePolygonsWithoutTextureVertices() throws IOException {
+        ArrayList<Polygon> polygons = new ArrayList<>();
+        Polygon polygon = new Polygon();
+        ArrayList<Integer> vertexIndices = new ArrayList<>();
+        ArrayList<Integer> normalIndices = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            vertexIndices.add(i);
+            normalIndices.add(i);
+        }
+        polygon.setVertexIndices(vertexIndices);
+        polygon.setNormalIndices(normalIndices);
+        polygons.add(polygon);
+
+        File file = new File("testFile.obj");
+        if (file.createNewFile()) {
+            System.out.println("File created");
+        }
+
+        try (PrintWriter printWriter = new PrintWriter(file)) {
+            ObjWriter.writePolygons(printWriter, polygons);
+        }
+
+        String fileContent = Files.readString(Path.of("testFile.obj"));
+        Assertions.assertTrue(fileContent.contains("f 1//1 2//2 3//3 "));
+    }
+
+    @Test
+    public void testWritePolygonsWithOnlyVertices() throws IOException {
+        ArrayList<Polygon> polygons = new ArrayList<>();
+        Polygon polygon = new Polygon();
+        ArrayList<Integer> vertexIndices = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            vertexIndices.add(i);
+        }
+        polygon.setVertexIndices(vertexIndices);
+        polygons.add(polygon);
+
+        File file = new File("testFile.obj");
+        if (file.createNewFile()) {
+            System.out.println("File created");
+        }
+
+        try (PrintWriter printWriter = new PrintWriter(file)) {
+            ObjWriter.writePolygons(printWriter, polygons);
+        }
+
+        String fileContent = Files.readString(Path.of("testFile.obj"));
+        Assertions.assertTrue(fileContent.contains("f 1 2 3 4 5 "));
     }
 
     @Test
