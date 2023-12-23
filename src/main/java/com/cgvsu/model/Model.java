@@ -12,7 +12,7 @@ public class Model {
     private final ArrayList<Polygon> polygons = new ArrayList<Polygon>();
 
     public ArrayList<Vector3f> getVertices() {
-        return new ArrayList<>(vertices);
+        return vertices;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Model {
     }
 
     public ArrayList<Vector2f> getTextureVertices() {
-        return new ArrayList<>(textureVertices);
+        return textureVertices;
     }
 
     public void addTextureVertex(Vector2f textureVertex) {
@@ -36,7 +36,7 @@ public class Model {
     }
 
     public ArrayList<Vector3f> getNormals() {
-        return new ArrayList<>(normals);
+        return normals;
     }
 
     public void addNormal(Vector3f normal) {
@@ -44,7 +44,7 @@ public class Model {
     }
 
     public ArrayList<Polygon> getPolygons() {
-        return new ArrayList<>(polygons);
+        return polygons;
     }
 
     public void addPolygon(Polygon polygon) {
